@@ -1,6 +1,5 @@
 #include <SDL_video.h>
 #include <SDL.h>
-#include <stdio.h>
 #include "window.h"
 #include "../debug/debug.h"
 #include "../config/config.h"
