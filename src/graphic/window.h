@@ -1,8 +1,10 @@
 #ifndef ANIHILACJA_WINDOW_H
 #define ANIHILACJA_WINDOW_H
 
-void init_window();
+void window_init();
 
-void destroy_window();
+void window_update();
+
+void window_destroy();
 
 #endif //ANIHILACJA_WINDOW_H

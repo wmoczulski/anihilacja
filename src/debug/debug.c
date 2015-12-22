@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include "debug.h"
+
 //TODO these functions shouldn't repeat the same chunk of code
 void error(int n, ...) {
     fprintf(stderr, "An error has occured");

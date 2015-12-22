@@ -1,9 +1,8 @@
 #include <SDL.h>
-#include "graphic/window.h"
+#include "game/game.h"
 
 int main(int argc, char *args[]) {
-    init_window();
+    game_run();
 
-    destroy_window();
     return 0;
 }

@@ -1,13 +1,14 @@
 #include <SDL_video.h>
 #include <SDL.h>
+#include <stdio.h>
 #include "window.h"
 #include "../debug/debug.h"
-#include "../../config.h"
+#include "../config/config.h"
 
 static SDL_Window *window = NULL;
 static SDL_Surface *surface = NULL;
 
-void init_window() {
+void window_init() {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         fatal_error(2, "Couldn't init SDL video", SDL_GetError());
     }
@@ -25,7 +26,13 @@ void init_window() {
     surface = SDL_GetWindowSurface(window);
 }
 
-void destroy_window() {
+
+void window_update() {
+
+}
+
+
+void window_destroy() {
     SDL_DestroyWindow(window);
 
     SDL_Quit();
