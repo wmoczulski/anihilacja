@@ -5,7 +5,7 @@
 #include "../config/config.h"
 
 static SDL_Window *window = NULL;
-static SDL_Surface *surface = NULL;
+
 
 void window_init() {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -27,7 +27,7 @@ void window_init() {
 
 
 void window_update() {
-
+    SDL_UpdateWindowSurface(window);
 }
 
 

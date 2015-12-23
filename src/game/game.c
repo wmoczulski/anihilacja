@@ -1,7 +1,11 @@
 #include <stdbool.h>
 #include <SDL_timer.h>
+#include <stdio.h>
 #include "game.h"
 #include "../config/config.h"
+#include "map.h"
+#include "../graphic/draw.h"
+#include "../graphic/window.h"
 
 
 static bool stop = false;
@@ -12,7 +16,9 @@ static void calculate_delta_time() {
 }
 
 static void init() {
+    window_init();
     calculate_delta_time();
+    map_init();
 }
 
 static void input() {
@@ -20,27 +26,35 @@ static void input() {
 }
 
 static void update() {
-
+    window_update();
+    if(SDL_GetTicks() > 10000){
+        game_stop();
+    }// stop game after 10 sec;
 }
 
 static void draw() {
-
+    draw_map();
 }
 
 static void destroy() {
-
+    window_destroy();
 }
 
-
+static void loop(){
+    input();
+    update();
+    draw();
+}
 void game_run() {
     init();
 
+    Uint32 current_tick = SDL_GetTicks();
     while (!stop) {
-        Uint32 ms_on_start = SDL_GetTicks();
-        input();
-        update();
-        draw();
-        SDL_Delay(ms_per_frame - SDL_GetTicks() + ms_on_start);
+        loop();
+        current_tick += ms_per_frame;
+        if(SDL_GetTicks() < current_tick){
+            SDL_Delay(current_tick - SDL_GetTicks());
+        }
     }
     stop = false;
 
