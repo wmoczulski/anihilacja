@@ -36,5 +36,7 @@ void list_empty(list *);
 
 int list_size(list *);
 
+list_node *list_find_by_ptr(list *, void *);
+
 
 #endif //ANIHILACJA_LIST_H

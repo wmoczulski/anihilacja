@@ -72,7 +72,7 @@ static Uint32 getColor(map_tile *tile) {
         changeSaturation(&r, &g, &b, SATURATION_NO_FOCUS);
     }
 
-    return SDL_MapRGB(surface->format, (int) r, (int) g, (int) b);
+    return SDL_MapRGB(surface->format, r, g, b);
 }
 
 void draw_map() {
@@ -85,7 +85,6 @@ void draw_map() {
             rect.h = WINDOW_H / VIRTUAL_H;
             Uint32 color = getColor(&map[x][y]);
             SDL_FillRect(surface, &rect, color);
-            window_update();
         }
     }
 }

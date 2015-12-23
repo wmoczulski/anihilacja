@@ -1,6 +1,8 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "list.h"
 #include "../config/config.h"
+#include "../debug/debug.h"
 
 list *list_new() {
     list *result = malloc(sizeof(list));
@@ -23,6 +25,7 @@ void list_delete(list *list1) {
     list_empty(list1);
     free(list1);
 }
+
 
 list_node *list_node_new(void *pVoid) {
     list_node *result = malloc(sizeof(list_node));
@@ -89,4 +92,15 @@ int list_size(list *list1) {
         node = node->next;
     }
     return size;
+}
+
+list_node *list_find_by_ptr(list *list1, void *pVoid) {
+    list_node *node = list1->first;
+    while (node != NULL) {
+        if(node->ptr == pVoid){
+            return node;
+        }
+        node = node->next;
+    }
+    return NULL;
 }

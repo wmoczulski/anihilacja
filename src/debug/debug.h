@@ -5,4 +5,6 @@ void error(int, ...);
 
 void fatal_error(int, ...);
 
+void debug(int, ...);
+
 #endif //ANIHILACJA_DEBUG_H

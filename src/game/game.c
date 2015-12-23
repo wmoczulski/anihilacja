@@ -6,6 +6,7 @@
 #include "map.h"
 #include "../graphic/draw.h"
 #include "../graphic/window.h"
+#include "../input/input.h"
 
 
 static bool stop = false;
@@ -21,15 +22,11 @@ static void init() {
     map_init();
 }
 
-static void input() {
-
-}
-
 static void update() {
     window_update();
-    if(SDL_GetTicks() > 10000){
+    if(SDL_GetTicks() > 100000){
         game_stop();
-    }// stop game after 10 sec;
+    }// stop game after 100 sec, just in case
 }
 
 static void draw() {
@@ -41,12 +38,13 @@ static void destroy() {
 }
 
 static void loop(){
-    input();
+    input_update();
     update();
     draw();
 }
 void game_run() {
     init();
+    update();
 
     Uint32 current_tick = SDL_GetTicks();
     while (!stop) {

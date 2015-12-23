@@ -35,7 +35,7 @@
 #define DEAD_G 99
 #define DEAD_B 99
 
-#define SATURATION_ON_FOCUS 1.5
+#define SATURATION_ON_FOCUS 0.2
 #define SATURATION_NO_FOCUS 1.0
 
 enum color{

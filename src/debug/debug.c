@@ -30,3 +30,17 @@ void fatal_error(int n, ...) {
     fprintf(stderr, "\n");
     exit(1);
 }
+
+
+void debug(int n, ...) {
+    fprintf(stdout, "Debug info:");
+
+    va_list list;
+    va_start(list, n);
+    while (n--) {
+        fprintf(stdout, " %s", va_arg(list, int));
+    }
+
+    va_end(list);
+    fprintf(stdout, "\n");
+}
