@@ -24,4 +24,8 @@ map_tile *get_tile_by_virtual_pos(int x, int y);
 
 void map_focus_on(int vx, int vy);
 
+void map_annihilate(int vx, int vy);
+
+void map_update();
+
 #endif //ANIHILACJA_MAP_H

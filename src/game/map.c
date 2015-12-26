@@ -77,11 +77,70 @@ void map_focus_on(int vx, int vy) {
         unfocus_all();
         tile->focus = true;
     }
-    list *neigbourhood = get_list_of_neighbours(vx, vy);
+    list *neighbourhood = get_list_of_neighbours(vx, vy);
 
-    while(list_size(neigbourhood) > 0){
-        list_node *current = list_get_first(neigbourhood);
+    while(list_size(neighbourhood) > 0){
+        list_node *current = list_get_first(neighbourhood);
         ((map_tile *)current->ptr)->focus = true;
         list_node_delete(current);
     }
+    list_delete(neighbourhood);
+}
+
+void map_annihilate(int vx, int vy) {
+    list *neighbourhood = get_list_of_neighbours(vx, vy);
+
+    if(list_size(neighbourhood) < 2){
+        return;
+    }
+
+    while(list_size(neighbourhood) > 0){
+        list_node *current = list_get_first(neighbourhood);
+        ((map_tile *)current->ptr)->color = DEAD;
+        list_node_delete(current);
+    }
+    list_delete(neighbourhood);
+}
+
+static void handle_vertical_gravity(){
+    for(int x = 0; x < VIRTUAL_W; x++){
+        for(int y = VIRTUAL_H - 2; y >= 0; y--){
+            if(map[x][y].color != DEAD && map[x][y + 1].color == DEAD){
+                map_tile t = map[x][y];
+                map[x][y] = map[x][y + 1];
+                map[x][y + 1] = t;
+            }
+        }
+    }
+}
+
+static void move_left(int target_x){
+    for(int x = target_x; x < VIRTUAL_W - 1; x++){
+        for(int y = 0; y < VIRTUAL_H; y++){
+            map[x][y] = map[x + 1][y];
+        }
+    }
+    for(int y = 0; y < VIRTUAL_H; y++){
+        map[VIRTUAL_W - 1][y].color = DEAD;
+    }
+}
+
+static void handle_horizontal_gravity(){
+    for(int x = 0; x < VIRTUAL_W - 1; x++){
+        int non_empty = false;
+        for(int y = VIRTUAL_H - 1; y >= 0; y--){
+            if(map[x][y].color != DEAD){
+                non_empty = true;
+                break;
+            }
+        }
+        if(!non_empty){
+            move_left(x);
+        }
+    }
+}
+
+void map_update() {
+    handle_vertical_gravity();
+    handle_horizontal_gravity();
 }

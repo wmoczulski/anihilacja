@@ -24,9 +24,7 @@ static void init() {
 
 static void update() {
     window_update();
-    if(SDL_GetTicks() > 100000){
-        game_stop();
-    }// stop game after 100 sec, just in case
+    map_update();
 }
 
 static void draw() {
